@@ -6,6 +6,11 @@ export DEB_BUILD_MAINT_OPTIONS := hardening=+all
 export RUN_VERY_EXPENSIVE_TESTS := yes
 export RUN_EXPENSIVE_TESTS := yes
 
+ifneq ($(filter nodoc,$(DEB_BUILD_PROFILES)),)
+MAKEINFO = true
+export MAKEINFO
+endif
+
 override_dh_auto_configure:
 	dh_auto_configure --verbose -- \
 		--localstatedir=/var/cache/locate \
